@@ -140,6 +140,8 @@ public class QueryService extends IntentService implements LocationListener {
 		HttpClient client = new DefaultHttpClient();
 		ResponseHandler<String> resp = new BasicResponseHandler();
 
+		// change to 500 later
+		
 		String googleQuery = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
 				+ String.valueOf(lat)
 				+ ","

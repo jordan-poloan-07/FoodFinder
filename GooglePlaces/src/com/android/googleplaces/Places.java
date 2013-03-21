@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,14 +33,13 @@ public class Places extends Activity {
 	public static final String _okay_status = "okay";
 	public static final String _not_okays_status = "notokaay";
 
-	static Context mCtx;
-
 	JSONObject resultQuery;
 	ListView places;
 	ArrayAdapter<PlaceDetails> placesAdapter;
 	ArrayList<PlaceDetails> placesList;
 	QueryReceiver receiver;
 	IntentFilter iF;
+	LinearLayout ll1, ll2;
 
 	double user_lat;
 	double user_lng;
@@ -49,10 +49,14 @@ public class Places extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mCtx = getApplicationContext();
+		ll1 = (LinearLayout) findViewById(R.id.ll1);
+		ll2 = (LinearLayout) findViewById(R.id.ll2);
 
 		placesList = new ArrayList<PlaceDetails>();
+
 		places = (ListView) findViewById(R.id.listPlaces);
+		places.setEmptyView(findViewById(R.id.emptyView));
+		ll2.setVisibility(View.GONE);
 		places.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -78,6 +82,7 @@ public class Places extends Activity {
 
 		startService(new Intent(this, QueryService.class));
 
+		// setting the activity receiver
 		receiver = new QueryReceiver();
 		iF = new IntentFilter();
 		iF.addAction(QueryReceiver.ACTION_RESP);
@@ -134,14 +139,11 @@ public class Places extends Activity {
 		@Override
 		public void onReceive(Context ctx, Intent i) {
 			// TODO Auto-generated method stub
-			Log.d("Receive test", "received it");
-			Log.d("Ewan ko", i.getStringExtra(_statusTag));
-
 			if (i.getStringExtra(_statusTag).equals(Places._okay_status)) {
-				// tangina nadali ako ng String.equals() at "=="
-				Log.d("Receive test", "okay naman");
+
 				String queryResults = i.getStringExtra(Places._resultsTag);
 				placesList.clear();
+
 				try {
 					placesList.addAll(generateListPlaces(queryResults));
 				} catch (JSONException e) {
@@ -153,11 +155,16 @@ public class Places extends Activity {
 				user_lng = i.getDoubleExtra(_user_lng_tag, 0);
 
 				placesAdapter.notifyDataSetChanged();
-				Log.d("Receive test", "finished it");
+
+				ll1.setVisibility(View.GONE);
+				ll2.setVisibility(View.VISIBLE);
 			}
 
 			else {
-				Log.d("Receive test", "error here");
+
+				ll1.setVisibility(View.GONE);
+				ll2.setVisibility(View.VISIBLE);
+
 				Toast.makeText(
 						getApplicationContext(),
 						"Error, its either GPS is not enabled or \nyou are disconnected to the internet",
