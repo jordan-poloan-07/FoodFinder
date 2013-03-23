@@ -1,10 +1,13 @@
-This is the project FoodFinder by:
+<b>This is the project FoodFinder by:</b>
 
-Bitancur, Mark L.
-Campo, Emmanuelito S.
-On, Dennis Marc G.
-Poloan, Jordan B.
+<i>Bitancur, Mark L.</i> <br />
+<i>Campo, Emmanuelito S.</i> <br />
+<i>On, Dennis Marc G.</i> <br />
+<i>Poloan, Jordan B.</i> <br />
 
-It can get prices from Jollibee and Chowking, enter your
+BSCOE V-1
+<br />
+
+<div text-align=justify>It can get prices from Jollibee and Chowking, just enter your
 available money and it will return a list of items 
-that you can by ( inclusive )
+that you can by ( inclusive )</div>
