@@ -5,9 +5,10 @@
 <i>On, Dennis Marc G.</i> <br />
 <i>Poloan, Jordan B.</i> <br />
 
+<div>
 BSCOE V-1
-<br />
+</div>
 
-<div text-align=justify>It can get prices from Jollibee and Chowking, just enter your
+<div text-align=justify>It can retrieve item price list from J'bee and C'king. Enter your
 available money and it will return a list of items 
-that you can by ( inclusive )</div>
+that you can buy as well as the nearest branches</div>
